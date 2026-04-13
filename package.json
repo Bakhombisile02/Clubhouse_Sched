@@ -7,8 +7,8 @@
     "start": "node server.js",
     "dev": "node --watch server.js",
     "dev:client": "cd client && npm run dev",
-    "build:client": "cd client && npm install && npm run build",
-    "postinstall": "cd client && npm install",
+    "build:client": "cd client && npm run build",
+    "postinstall": "cd client && npm ci --ignore-scripts",
     "test": "node test/scraper.test.js"
   },
   "repository": {
@@ -20,7 +20,7 @@
   "license": "ISC",
   "type": "commonjs",
   "engines": {
-    "node": ">=20.18.1"
+    "node": ">=22.0.0"
   },
   "bugs": {
     "url": "https://github.com/Bakhombisile02/Clubhouse_Sched/issues"

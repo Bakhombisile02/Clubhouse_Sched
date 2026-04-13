@@ -23,11 +23,12 @@ npm start            # runs on http://localhost:3000
 For development with hot-reload on the frontend:
 
 ```bash
-# Terminal 1 – API server
+# Terminal 1 – API server on http://localhost:3000
 npm run dev
 
-# Terminal 2 – Vite dev server (proxies API to localhost:3000)
+# Terminal 2 – Vite dev server (proxies /api to localhost:3000)
 npm run dev:client
+# Open http://localhost:5173 for the Vite-served frontend
 ```
 
 Copy `.env.example` to `.env` to customise settings:

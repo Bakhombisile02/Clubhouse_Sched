@@ -4,10 +4,8 @@ import {
   Container,
   Tabs,
   Button,
-  Badge,
   Group,
   Text,
-  Title,
   Loader,
   Alert,
   Box,
@@ -56,10 +54,20 @@ export default function App() {
       const res = await fetch(endpoint, { method });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const json = await res.json();
-      if (!json.ok) throw new Error(json.error || 'Unknown error');
 
-      setData(json.data);
-      setStatus('live');
+      // Always store the data so per-section errors render in each tab
+      if (json.data) setData(json.data);
+
+      if (json.ok) {
+        setStatus('live');
+      } else {
+        // Partial failure: data is set but some sections may have errors
+        const msg =
+          json.error ||
+          'Some sections could not be loaded. Check individual tabs for details.';
+        setError(msg);
+        setStatus(json.data ? 'live' : 'error');
+      }
     } catch (err) {
       setError(err.message);
       setStatus('error');
