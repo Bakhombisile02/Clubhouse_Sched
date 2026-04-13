@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hoop Nation Junior Showcase – Live Draw & Fixtures</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <!-- Favicon (inline basketball emoji via data URI) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏀</text></svg>" />
+</head>
+<body>
+  <!-- ── Header ──────────────────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <span class="logo">🏀</span>
+        <div>
+          <h1 class="site-title">Hoop Nation Junior Showcase</h1>
+          <p class="site-subtitle">Live Teams · Pool Play · Fixtures &amp; Draw</p>
+        </div>
+        <div class="header-meta" id="eventMeta">
+          <div class="badge badge-live" id="liveBadge">⏳ Loading…</div>
+          <div class="last-updated" id="lastUpdated"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Controls ───────────────────────────────────────────────────────── -->
+  <div class="container">
+    <div class="controls-bar">
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="overview">📋 Overview</button>
+        <button class="tab-btn" data-tab="teams">👕 Teams</button>
+        <button class="tab-btn" data-tab="pools">🏊 Pool Play</button>
+        <button class="tab-btn" data-tab="fixtures">📅 Fixtures</button>
+        <button class="tab-btn" data-tab="results">🏆 Results</button>
+      </div>
+      <button class="btn btn-primary" id="refreshBtn" title="Force refresh from HoopNation">
+        🔄 Refresh
+      </button>
+    </div>
+  </div>
+
+  <!-- ── Main content ───────────────────────────────────────────────────── -->
+  <main class="container" id="mainContent">
+
+    <!-- Overview tab -->
+    <section class="tab-panel active" id="tab-overview">
+      <div class="event-card" id="eventInfoCard">
+        <div class="loading-state">
+          <div class="spinner"></div>
+          <p>Fetching live data from hoopnation.basketball…</p>
+        </div>
+      </div>
+
+      <div class="stats-grid" id="statsGrid" style="display:none">
+        <div class="stat-card">
+          <div class="stat-value" id="statTeams">—</div>
+          <div class="stat-label">Teams</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statPools">—</div>
+          <div class="stat-label">Pools</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statFixtures">—</div>
+          <div class="stat-label">Fixtures</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="statResults">—</div>
+          <div class="stat-label">Results</div>
+        </div>
+      </div>
+
+      <div id="overviewError" class="error-banner" style="display:none"></div>
+    </section>
+
+    <!-- Teams tab -->
+    <section class="tab-panel" id="tab-teams">
+      <div class="panel-header">
+        <h2>Registered Teams</h2>
+        <input class="search-box" id="teamSearch" type="search" placeholder="Search teams…" />
+      </div>
+      <div id="teamsContent">
+        <div class="loading-state"><div class="spinner"></div><p>Loading teams…</p></div>
+      </div>
+    </section>
+
+    <!-- Pools tab -->
+    <section class="tab-panel" id="tab-pools">
+      <div class="panel-header">
+        <h2>Pool Play Draw</h2>
+      </div>
+      <div id="poolsContent">
+        <div class="loading-state"><div class="spinner"></div><p>Loading pool play…</p></div>
+      </div>
+    </section>
+
+    <!-- Fixtures tab -->
+    <section class="tab-panel" id="tab-fixtures">
+      <div class="panel-header">
+        <h2>Game Fixtures</h2>
+        <input class="search-box" id="fixtureSearch" type="search" placeholder="Search teams / courts…" />
+      </div>
+      <div id="fixturesContent">
+        <div class="loading-state"><div class="spinner"></div><p>Loading fixtures…</p></div>
+      </div>
+    </section>
+
+    <!-- Results tab -->
+    <section class="tab-panel" id="tab-results">
+      <div class="panel-header">
+        <h2>Live Results</h2>
+      </div>
+      <div id="resultsContent">
+        <div class="loading-state"><div class="spinner"></div><p>Loading results…</p></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────────────────────────── -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>
+        Data sourced live from
+        <a href="https://www.hoopnation.basketball/tournaments/junior-showcase" target="_blank" rel="noopener">
+          hoopnation.basketball
+        </a>
+        · Auto-refreshes every 5&nbsp;minutes
+      </p>
+    </div>
+  </footer>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
