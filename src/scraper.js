@@ -43,8 +43,9 @@ const http = axios.create({
 
 /**
  * Load an HTML page and return a cheerio root.
- * Returns null when the page cannot be retrieved.
+ * Throws on network or HTTP errors (callers should handle via try/catch or Promise.allSettled).
  * @param {string} path  URL path relative to BASE_URL
+ * @returns {Promise<{$: import('cheerio').CheerioAPI, url: string}>}
  */
 async function loadPage(path) {
   const url = `${BASE_URL}${path}`;
@@ -312,4 +313,12 @@ async function fetchAll() {
   };
 }
 
-module.exports = { fetchTeams, fetchPools, fetchFixtures, fetchResults, fetchAll };
+module.exports = {
+  fetchTeams,
+  fetchPools,
+  fetchFixtures,
+  fetchResults,
+  fetchAll,
+  // Exported for testing – prefixed with _internal to signal they are not public API
+  _internal: { parseTeams, parsePools, parseFixtures, parseEventInfo },
+};

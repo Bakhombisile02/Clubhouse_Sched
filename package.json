@@ -16,6 +16,9 @@
   "author": "",
   "license": "ISC",
   "type": "commonjs",
+  "engines": {
+    "node": ">=20.18.1"
+  },
   "bugs": {
     "url": "https://github.com/Bakhombisile02/Clubhouse_Sched/issues"
   },

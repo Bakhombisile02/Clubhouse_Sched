@@ -40,9 +40,13 @@ function invalidate() {
   cache.flushAll();
 }
 
-/** Return the number of seconds until the given key expires, or 0 if missing. */
+/** Return the number of seconds until the given key expires, or 0 if missing or expired. */
 function ttl(key) {
-  return cache.getTtl(key) || 0;
+  const expiresAt = cache.getTtl(key);
+  if (!expiresAt || expiresAt <= 0) return 0;
+
+  const remainingMs = expiresAt - Date.now();
+  return Math.max(0, Math.ceil(remainingMs / 1000));
 }
 
 module.exports = { getOrFetch, invalidate, ttl, KEYS };

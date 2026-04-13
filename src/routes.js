@@ -24,7 +24,11 @@ router.get(
   '/all',
   wrap(async (_req, res) => {
     const data = await getOrFetch(KEYS.ALL, scraper.fetchAll);
-    res.json({ ok: true, data });
+    // Surface ok:false when every section has an error
+    const allErrored = ['teams', 'pools', 'fixtures', 'results'].every(
+      (key) => data[key]?.error
+    );
+    res.json({ ok: !allErrored, data });
   })
 );
 
@@ -79,9 +83,26 @@ router.get(
 router.post(
   '/refresh',
   wrap(async (_req, res) => {
-    invalidate();
-    const data = await getOrFetch(KEYS.ALL, scraper.fetchAll);
-    res.json({ ok: true, message: 'Cache cleared and data refreshed.', data });
+    try {
+      invalidate();
+      const data = await getOrFetch(KEYS.ALL, scraper.fetchAll);
+      const allErrored = ['teams', 'pools', 'fixtures', 'results'].every(
+        (key) => data[key]?.error
+      );
+      res.json({ ok: !allErrored, message: 'Cache cleared and data refreshed.', data });
+    } catch (err) {
+      res.json({
+        ok: false,
+        error: err.message,
+        data: {
+          teams: { teams: [] },
+          pools: { pools: [] },
+          fixtures: { fixtures: [] },
+          results: { results: [] },
+          fetchedAt: new Date().toISOString(),
+        },
+      });
+    }
   })
 );
 

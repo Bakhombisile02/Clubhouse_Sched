@@ -41,10 +41,12 @@ app.use((err, _req, res, _next) => {
   res.status(status).json({ ok: false, error: message });
 });
 
-// ── Start ─────────────────────────────────────────────────────────────────────
-app.listen(PORT, () => {
-  console.log(`🏀  Hoop Nation Junior Showcase app running on http://localhost:${PORT}`);
-  console.log(`    Serving live data from https://www.hoopnation.basketball`);
-});
+// ── Start (only when run directly, not when imported for testing) ─────────────
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`🏀  Hoop Nation Junior Showcase app running on http://localhost:${PORT}`);
+    console.log(`    Serving live data from https://www.hoopnation.basketball`);
+  });
+}
 
 module.exports = app; // export for testing
