@@ -1,0 +1,10 @@
+body {
+  margin: 0;
+  background-color: #f8fafc;
+  min-height: 100vh;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}

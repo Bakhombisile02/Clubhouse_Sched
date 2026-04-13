@@ -15,8 +15,19 @@ and results** for the [Hoop Nation Junior Showcase](https://www.hoopnation.baske
 ## Quick start
 
 ```bash
-npm install
-npm start          # runs on http://localhost:3000
+npm install          # installs server & client dependencies
+npm run build:client # builds the React frontend to public/
+npm start            # runs on http://localhost:3000
+```
+
+For development with hot-reload on the frontend:
+
+```bash
+# Terminal 1 – API server
+npm run dev
+
+# Terminal 2 – Vite dev server (proxies API to localhost:3000)
+npm run dev:client
 ```
 
 Copy `.env.example` to `.env` to customise settings:
@@ -52,6 +63,8 @@ npm test
 ## Tech stack
 
 - **Express 5** – HTTP server
+- **React 19** + **Vite** – Frontend build
+- **Mantine 9** – UI component library
 - **axios** – HTTP client for fetching HoopNation pages
 - **cheerio** – HTML parsing / scraping
 - **node-cache** – In-memory caching
